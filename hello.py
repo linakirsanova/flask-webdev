@@ -43,3 +43,7 @@ def menu():
   return """<p>Check out <a href="/about">my About page</a>!</p>
     <p>And a <a href="/favorite-songs"> list of my favorite songs</a>!</p>
   """
+
+@app.route('/apps/years-to-100/<name>/<age>')
+def years_to_100(name, age):
+   return f"Hey, {name}! You have {100 - int(age)} years until 100"
