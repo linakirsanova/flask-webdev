@@ -2,13 +2,32 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config():
-    SECRET_KEY = "zs9QFQp*6NQqqJxsGn4@m29ZTd.2v4"
-    SQLALCHEMY_DATABASE_URI =\
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # @staticmethod
+    @staticmethod
     def init_app(app):
         pass
 
-config = {'default': Config}
+class DevelopmentConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_DEV_URL') or \
+        f'sqlite:///{os.path.join(basedir, 'data-dev.sqlite')}'
+
+
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_TEST_URL') or \
+        f'sqlite:///{os.path.join(basedir, "data-test.sqlite")}'
+
+
+class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        f'sqlite:///{os.path.join(basedir, "data.sqlite")}'
+
+config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
+    'default': DevelopmentConfig
+}
