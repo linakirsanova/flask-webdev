@@ -12,16 +12,7 @@ def test_current_app():
     assert current_app
     assert current_app.config['TESTING']
 
-def test_database_insert():
-    app = create_app('testing')
-    assert app.config['TESTING']
-    assert 'data-test.sqlite' in app.config['SQLALCHEMY_DATABASE_URI']
-    app.app_context().push()
-    db.create_all()
-
+def test_database_insert(new_app):
     u = User(email='john@example.com', username='john')
     db.session.add(u)
     db.session.commit()
-
-    db.session.remove()
-    db.drop_all()
