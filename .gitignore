@@ -1,1 +1,18 @@
+# Python bytecode
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Database files
+*.sqlite
+*.db
+
+# Pytest cache
+.pytest_cache/
+
+# Other common Python ignores
 .env
+venv/
+env/
+instance/
