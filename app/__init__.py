@@ -3,12 +3,16 @@ from flask_bootstrap import Bootstrap
 import os
 from flask_sqlalchemy import SQLAlchemy
 from config import config
+from flask_login import LoginManager
 
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
 
 
 def create_app(config_name='default'):
@@ -25,5 +29,7 @@ def create_app(config_name='default'):
 
   from .auth import auth as auth_blueprint
   app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+  login_manager.init_app(app)
 
   return app
