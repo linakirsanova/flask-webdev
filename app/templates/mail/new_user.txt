@@ -1,0 +1,8 @@
+NEW USER REGISTRATION - Ragtime
+
+A new user has successfully registered on Ragtime.
+
+USER INFORMATION:
+==================
+Name: {{ username }}
+Email: {{ email }}

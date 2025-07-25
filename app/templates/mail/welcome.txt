@@ -1,0 +1,13 @@
+Welcome to Ragtime!
+
+Hi {{ user.username }},
+
+Thank you for joining Ragtime! We're thrilled to have you as part of our community.
+
+YOUR ACCOUNT DETAILS:
+Email: {{ user.email }}
+
+Get started now: {{ url_for('auth.login') }}
+
+Best regards,
+The Ragtime Team

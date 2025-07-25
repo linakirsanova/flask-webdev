@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import config
 from flask_login import LoginManager
+from flask_mail import Mail
 
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
@@ -16,6 +17,7 @@ migrate = Migrate()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
+mail = Mail()
 
 def create_app(config_name='default'):
   app = Flask(__name__)
@@ -34,5 +36,6 @@ def create_app(config_name='default'):
   app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
   login_manager.init_app(app)
+  mail.init_app(app)
 
   return app
